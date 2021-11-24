@@ -21,8 +21,7 @@ void Span::addNumber( int num )
 {
 	if ( _nums.size() >= _n )
 		throw ( std::overflow_error("Span is full") );
-
-	_nums.push_back( num );
+	_nums.insert( num );
 }
 unsigned long long Span::shortestSpan()
 {

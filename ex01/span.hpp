@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <set>
 #include <stdexcept>
 
 class Span {
@@ -13,14 +13,13 @@ public:
 	template <class TIterator>
 	void addNumbers( TIterator begin, TIterator end )
 	{
-		if ( end - begin + _nums.size() > _n  )
-			throw std::exception();
-
-		_nums.insert( _nums.end() - 1, begin, end );
+		if ( std::distance( begin, end ) + _nums.size() > _n  )
+			throw std::overflow_error( "addNumbers(): there is no enough space in span" );
+		_nums.insert( begin, end );
 	}
 	unsigned long long shortestSpan();
 	unsigned long long longestSpan();
 private:
-	unsigned 			_n;
-	std::vector< int >	_nums;
+	unsigned 				_n;
+	std::multiset< int >	_nums;
 };
