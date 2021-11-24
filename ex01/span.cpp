@@ -1,33 +1,54 @@
 #include "span.hpp"
-#include <algorithm>
+#include <numeric>
+#include <iterator>
+#include <iostream>
 
 Span::Span( unsigned n )
-:	_n ( n )
+:	_size ( n )
 {}
 Span::Span( const Span& src )
-:	_n( src._n ), _nums( src._nums )
+:	_size( src._size ), _nums( src._nums )
 {}
 Span::~Span()
 {}
 
 Span& Span::operator=( const Span& src )
 {
-	_n = src._n;
+	_size = src._size;
 	_nums = src._nums;
 	return *this;
 }
 
 void Span::addNumber( int num )
 {
-	if ( _nums.size() >= _n )
-		throw ( std::overflow_error("Span is full") );
+	if ( _nums.size() >= _size )
+		throw ( std::overflow_error( "addNumber(): Span is full" ) );
 	_nums.insert( num );
 }
-unsigned long long Span::shortestSpan()
+unsigned Span::shortestSpan()
 {
-	return 0;
+	std::multiset< unsigned >	numDiffs;
+	std::adjacent_difference( _nums.begin(), _nums.end(),
+		std::inserter( numDiffs, numDiffs.begin() )
+	);
+	return *numDiffs.begin();
 }
-unsigned long long Span::longestSpan()
+unsigned Span::longestSpan()
 {
-	return 1;
+	if ( _nums.size() < 2 )
+		throw std::length_error( "longestSpan(): Span elements < 2" );
+	return *--_nums.end() - *_nums.begin();
+}
+unsigned			Span::size() const
+{	return _size; }
+unsigned			Span::size( unsigned n )
+{
+	if ( n < _nums.size() )
+		_nums.clear();
+	return _size = n;
+}
+void				Span::printSummary()
+{
+		std::cout << "shortestSpan: " << shortestSpan() << std::endl;
+		std::cout << "longestSpan : " << longestSpan() << std::endl;
 }

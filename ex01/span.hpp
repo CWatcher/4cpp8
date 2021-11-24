@@ -5,7 +5,7 @@
 class Span {
 public:
 	Span();
-	Span( unsigned n );
+	Span( unsigned size );
 	Span( const Span& src );
 	Span& operator=( const Span& src );
 	virtual ~Span();
@@ -13,13 +13,16 @@ public:
 	template <class TIterator>
 	void addNumbers( TIterator begin, TIterator end )
 	{
-		if ( std::distance( begin, end ) + _nums.size() > _n  )
-			throw std::overflow_error( "addNumbers(): there is no enough space in span" );
+		if ( std::distance( begin, end ) + _nums.size() > _size  )
+			throw std::overflow_error( "addNumbers(): there is no enough space in the span" );
 		_nums.insert( begin, end );
 	}
-	unsigned long long shortestSpan();
-	unsigned long long longestSpan();
+	unsigned	shortestSpan();
+	unsigned	longestSpan();
+	unsigned	size() const;
+	unsigned	size( unsigned );
+	void		printSummary();
 private:
-	unsigned 				_n;
+	unsigned 				_size;
 	std::multiset< int >	_nums;
 };
