@@ -1,6 +1,8 @@
 #pragma once
 #include <set>
 #include <stdexcept>
+#include <ostream>
+#include <iostream>
 
 class Span {
 public:
@@ -22,7 +24,10 @@ public:
 	unsigned	size() const;
 	unsigned	size( unsigned );
 	void		printSummary();
+	void		printNums( std::ostream& os = std::cout );
 private:
 	unsigned 				_size;
 	std::multiset< int >	_nums;
 };
+
+std::ostream&	operator<<( std::ostream& os, Span span );

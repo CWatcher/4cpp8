@@ -50,5 +50,19 @@ unsigned			Span::size( unsigned n )
 void				Span::printSummary()
 {
 		std::cout << "shortestSpan: " << shortestSpan() << std::endl;
-		std::cout << "longestSpan : " << longestSpan() << std::endl;
+		std::cout << "longestSpan : " << longestSpan() << std::endl
+		          << std::endl;
+}
+void				Span::printNums ( std::ostream& os )
+{
+	std::multiset< int >::iterator it = _nums.begin();
+	for ( ; it != _nums.end(); it++ )
+		os << *it << " ";
+}
+
+std::ostream&	operator<<( std::ostream& os, Span span )
+{
+	os << "size = " << span.size() << ", numbers { ";
+	span.printNums( os );
+	return os << "} " << std::endl;
 }

@@ -3,7 +3,7 @@ SRC			=	span.cpp	\
 OBJ			=	$(SRC:.cpp=.o)
 NAME		=	ex01
 CXX			= 	c++
-CXXFLAGS	= 	-Wextra -Wall -Werror  -std=c++98 -g #-fsanitize=address
+CXXFLAGS	= 	-Wextra -Wall -Werror  -std=c++98 -g -fsanitize=address
 
 all		: $(NAME)
 
