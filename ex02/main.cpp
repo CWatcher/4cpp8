@@ -1,6 +1,17 @@
 #include "mutantstack.hpp"
 #include <iostream>
-#include <vector>
+#include <list>
+
+
+template < typename TContainer >
+void	printContainer( TContainer container )
+{
+	std::cout << "{ ";
+	typename TContainer::iterator it = container.begin();
+	for (; it != container.end(); it++ )
+		std::cout << *it << " ";
+	std::cout << "}" << std::endl;
+}
 
 int main()
 {
@@ -15,7 +26,7 @@ int main()
 	mstack.push(737);
 	mstack.push(21);
 	mstack.push(42);
-	std::cout << mstack;
+	printContainer( mstack );
 	mstack.pop();
 	std::cout << "Pop(), Top  : " << mstack.top() << std::endl;
 	mstack.push( ~(-1U >> 1) );
@@ -24,6 +35,7 @@ int main()
 	MutantStack< int > mstack2( s );
 	MutantStack< int > mstack3;
 	mstack3 = mstack2;
-	std::cout << "After copy constructors(), operator=() :\n" << mstack3;
+	std::cout << "After copy constructors(), operator=() :\n";
+	printContainer( mstack3 );
 	return 0;
 }

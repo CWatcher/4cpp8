@@ -25,16 +25,3 @@ public:
 	{	return this->c.end();
 	}
 };
-
-template < typename T, typename TContainer >
-std::ostream&	operator<<( std::ostream& os, MutantStack< T, TContainer > mstack )
-{
-	typename MutantStack< T, TContainer >::iterator it = mstack.begin();
-	typename MutantStack< T, TContainer >::iterator end = mstack.end();
-	os << "{ ";
-	while (it != end) {
-		os << *it << " ";
-		++it;
-	}
-	return os << " }" << std::endl;
-}
